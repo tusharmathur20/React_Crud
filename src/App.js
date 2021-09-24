@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Album from "./Components/Album";
+import ReactPaginate from "react-paginate";
 
 const App = () => {
   const [Albums, setAlbums] = useState([]);
@@ -84,25 +85,33 @@ const App = () => {
           }}
         />
       }
+      <table>
+        <thead className="list">
+          <th>Title</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </thead>
 
-      {Albums.filter((vals) => {
-        if (Search == "") {
-          return vals;
-        } else if (vals.title.toLowerCase().includes(Search)) {
-          return vals.title;
-        }
-      }).map((album) => (
-        <Album
-          id={album.id}
-          key={album.id}
-          title={album.title}
-          onDelete={onDelete}
-          onEdit={onEdit}
-        />
-      ))}
-      {/* {Albums.map((album) => (
+        {Albums.filter((vals) => {
+          if (Search == "") {
+            return vals;
+          } else if (vals.title.toLowerCase().includes(Search)) {
+            return vals.title;
+          }
+        }).map((album) => (
+          <Album
+            Albums={Albums}
+            id={album.id}
+            key={album.id}
+            title={album.title}
+            onDelete={onDelete}
+            onEdit={onEdit}
+          />
+        ))}
+        {/* {Albums.map((album) => (
         <Album id={album.id} key={album.id} title={album.title} />
       ))} */}
+      </table>
     </div>
   );
 };

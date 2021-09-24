@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import "./Album.css";
+import ReactPaginate from "react-paginate";
 
-const Album = ({ id, title, onDelete, onEdit }) => {
+const Album = ({ Albums, id, title, onDelete, onEdit }) => {
   const [isEdit, setIsEdit] = useState(false);
   const handleDelete = () => {
     onDelete(id);
@@ -17,23 +18,29 @@ const Album = ({ id, title, onDelete, onEdit }) => {
   };
 
   return (
-    <div>
-      {isEdit ? (
-        <form onSubmit={handleOnEditSubmit}>
-          <input placeholder="title" name="title" defaultValue={title} />
-          <button onSubmit={handleOnEditSubmit}>Save</button>
-        </form>
-      ) : (
-        <div className="list">
-          <span>{title}</span>
+    <tr className="list">
+      <td>
+        {" "}
+        {isEdit ? (
+          <form onSubmit={handleOnEditSubmit}>
+            <input placeholder="title" name="title" defaultValue={title} />
+            <button onSubmit={handleOnEditSubmit}>Save</button>
+          </form>
+        ) : (
+          title
+        )}
+      </td>
 
-          <span>
-            <button onClick={handleEdit}>Edit</button>
-            <button onClick={handleDelete}>Delete</button>
-          </span>
-        </div>
-      )}
-    </div>
+      <td>
+        {" "}
+        <button onClick={handleEdit}>Edit</button>
+      </td>
+      <td>
+        {" "}
+        <button onClick={handleDelete}>Delete</button>
+      </td>
+    </tr>
   );
 };
+
 export default Album;
